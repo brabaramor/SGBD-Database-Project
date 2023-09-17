@@ -48,7 +48,7 @@ create table veiculo (
 );
 
 
---cria tabela do endereco da relação cliente > aluga > veículo
+--cria tabela da relação cliente > aluga > veículo
 create table aluga (
   	id_alug number not null,
   	valor_alug number not null,
@@ -91,7 +91,7 @@ INSERT INTO id_cidade (cod_cidade, nome_cidade, uf)
 VALUES (15, 'Salvador', 'BA');
 
 
-SELECT cod_cidade, nome_cidade, uf FROM id_cidade;
+SELECT * FROM id_cidade;
 
 
 --Inserções na tabela cliente_endereco
@@ -111,7 +111,7 @@ INSERT INTO cliente_endereco (cod_endereco, nome_end, no_casa, complemento, bair
 VALUES (05, 'Rua Ricardo Samuel de Araujo', 123, 'casa 2', 'Jardim Figueiredo', 11, 08526030);
 
 
-SELECT cod_endereco, nome_end, no_casa, complemento, bairro, cod_cidade, cep FROM cliente_endereco;
+SELECT * FROM cliente_endereco;
 
 
 --Inserções na tabela cliente
@@ -131,7 +131,7 @@ INSERT INTO cliente (cliente_nome, cliente_sobrenome, cpf, nascimento, tipo_cnh,
 VALUES ('Nayeon', 'Lim', 15975385214, null, 'B', 02);
 
 
-SELECT cliente_nome, cliente_sobrenome, cpf, nascimento, tipo_cnh, cod_endereco FROM cliente;
+SELECT * FROM cliente;
 
 
 
@@ -152,8 +152,7 @@ INSERT INTO veiculo (id_veiculo, placa, veiculo_nome, modelo, ano_veiculo, fabri
 VALUES (50, 'JIH1Y00', 'HB20', 'Comfort Plus', 2024, 'Hyundai', 5, 300, 200, 1260, 4800);
 
 
-SELECT id_veiculo, placa, veiculo_nome, modelo, ano_veiculo, fabricante, no_passageiros, litros_portamalas, preco_dia, preco_semana, preco_mes FROM veiculo;
-
+SELECT * FROM veiculo;
 
 
 --inserir informações sobre alugueis realizados
@@ -182,3 +181,28 @@ VALUES (013, 40, 400, '2023-09-28', '2023-09-29', 'Verificação dos freios e tr
 
 INSERT INTO manutencao (id_manu, id_veiculo, valor_manu, inicio_manu, fim_manu, tipo_manu)
 VALUES (014, 50, 50, '2023-09-15', '2023-09-16', 'Troca de filtro de ar');
+
+--consultas
+--obter todos os veículos que nunca foram locados para nenhum cliente
+SELECT * FROM Veiculo WHERE id_veiculo NOT IN (SELECT id_veiculo FROM aluga);
+
+--encontrar os clientes que alugaram um veículo específico, identificado pela placa
+SELECT cpf FROM cliente
+JOIN aluga a ON c.cpf = a.cpf
+JOIN veiculo v ON a.id_veiculo = v.id_veiculo
+WHERE v.placa = 'TWI1CE12';
+
+--obter os clientes que alugaram veículos, juntamente com as informações sobre o veículo alugado, como a placa, modelo e fabricante.
+SELECT
+    c.cliente_nome,
+    c.cliente_sobrenome,
+    v.placa,
+    v.modelo,
+    v.fabricante
+FROM
+    cliente c
+JOIN
+    aluga a ON c.cpf = a.cpf
+JOIN
+    veiculo v ON a.id_veiculo = v.id_veiculo;
+
