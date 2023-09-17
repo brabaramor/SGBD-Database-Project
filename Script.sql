@@ -119,7 +119,7 @@ INSERT INTO cliente_endereco (cod_endereco, nome_end, no_casa, complemento, bair
 VALUES (03, 'Rua Duque de Caxias', 1304, 'ap 1', 'Centro Histórico', 03, 90010280);
 
 INSERT INTO cliente_endereco (cod_endereco, nome_end, no_casa, complemento, bairro, cod_cidade, cep)
-VALUES (03, 'Rua Ferreira Viana', 76, 'ap 2', 'São José', 02, 92425140);
+VALUES (04, 'Rua Ferreira Viana', 76, 'ap 2', 'São José', 02, 92425140);
 
 INSERT INTO cliente_endereco (cod_endereco, nome_end, no_casa, complemento, bairro, cod_cidade, cep)
 VALUES (03, 'Rua Ricardo Samuel de Araujo', 123, 'casa 2', 'Jardim Figueiredo', 01, 08526030);
@@ -153,10 +153,20 @@ INSERT INTO preco_veiculo (id_preco, preco_dia, preco_semana, preco_mes)
 VALUES (13, 400, 2520, 9600);
 
 INSERT INTO preco_veiculo (id_preco,  preco_dia, preco_semana, preco_mes)
-VALUES (14, 04, 250, 1575, 6000);
+VALUES (14, 250, 1575, 6000);
 
 INSERT INTO preco_veiculo (id_preco, preco_dia, preco_semana, preco_mes)
 VALUES (15, 200, 1260, 4800);
+
+
+--inserir informações sobre id_veiculo na  tabela de preços
+INSERT INTO preco_veiculo (id_veiculo)
+VALUES 
+  (01), 
+  (02), 
+  (03), 
+  (04), 
+  (05);
 
 
 --inserir infos sobre os veículos
@@ -174,11 +184,6 @@ VALUES (04, 'MIN4T02', 'Peugeot', '208', 2024, 'Citroen', 5, 285, 14);
 
 INSERT INTO veiculos (id_veiculo, placa, veiculo_nome, modelo, ano_veiculo, fabricante, no_passageiros, litros_portamalas, id_preco)
 VALUES (05, 'JIH1Y00', 'HB20', 'Comfort Plus', 2024, 'Hyundai', 5, 300, 15);
-
-
---inserir informações sobre id_veiculo na  tabela de preços
-INSERT INTO preco_veiculo (id_veiculo)
-VALUES (01), (02), (03), (04), (05);
 
 
 --inserir informações sobre alugueis realizados
