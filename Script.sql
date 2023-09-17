@@ -21,10 +21,10 @@ create table cliente_endereco (
 
 --cria tabela de cliente
 create table cliente (
-  cliente_nome varchar2 not null,
-  cliente_sobrenome varchar2 not null,
+  cliente_nome varchar2(20) not null,
+  cliente_sobrenome varchar2(20) not null,
   cpf number not null,
-  nascimento date not null,
+  nascimento date,
   tipo_cnh varchar2(2),
   cod_endereco number not null,
   primary key (cpf),
@@ -41,29 +41,12 @@ create table veiculo (
   fabricante varchar2(50) not null,
   no_passageiros number not null,
   litros_portamalas number not null,
-  primary key (id_veiculo)
-);
-
---cria tabela do preco do veículo por dia, semana e mês
-create table preco_veiculo (
-  id_preco number not null,
   preco_dia number,
   preco_semana number,
   preco_mes number,
-  primary key (id_preco)
+  primary key (id_veiculo)
 );
 
---Inserir o id_preco na tabela de veiculo
-ALTER TABLE veiculo 
-ADD (id_preco number not null);
-
-ALTER TABLE veiculo ADD CONSTRAINT fk_veiculo_id_preco FOREIGN KEY (id_preco) REFERENCES preco_veiculo (id_preco);
-
---Inserir o id_veiculo na tabela de preco
-ALTER TABLE preco_veiculo 
-ADD (id_veiculo number);
-
-ALTER TABLE preco_veiculo ADD CONSTRAINT fk_preco_veiculo_id_veiculo FOREIGN KEY (id_veiculo) REFERENCES veiculo (id_veiculo);
 
 --cria tabela do endereco da relação cliente > aluga > veículo
 create table aluga (
@@ -93,122 +76,109 @@ create table manutencao (
 
 --Inserções na tabela id_cidade
 INSERT INTO id_cidade (cod_cidade, nome_cidade, uf)
-VALUES (01, 'Ferraz de Vasconcelos', 'SP');
+VALUES (11, 'Ferraz de Vasconcelos', 'SP');
 
 INSERT INTO id_cidade (cod_cidade, nome_cidade, uf)
-VALUES (02, 'Canoas', 'RS');
+VALUES (12, 'Canoas', 'RS');
 
 INSERT INTO id_cidade (cod_cidade, nome_cidade, uf)
-VALUES (03, 'Porto Alegre', 'RS');
+VALUES (13, 'Porto Alegre', 'RS');
 
 INSERT INTO id_cidade (cod_cidade, nome_cidade, uf)
-VALUES (04, 'Niterói', 'RJ');
+VALUES (14, 'Niterói', 'RJ');
 
 INSERT INTO id_cidade (cod_cidade, nome_cidade, uf)
-VALUES (05, 'Salvador', 'BA');
+VALUES (15, 'Salvador', 'BA');
+
+
+SELECT cod_cidade, nome_cidade, uf FROM id_cidade;
 
 
 --Inserções na tabela cliente_endereco
 INSERT INTO cliente_endereco (cod_endereco, nome_end, no_casa, complemento, bairro, cod_cidade, cep)
-VALUES (01, 'Rua Tóquio', 141, null, 'Praia do Flamengo', 05, 41601245);
+VALUES (01, 'Rua Tóquio', 141, null, 'Praia do Flamengo', 15, 41601245);
 
 INSERT INTO cliente_endereco (cod_endereco, nome_end, no_casa, complemento, bairro, cod_cidade, cep)
-VALUES (02, 'Avenida Ernani do Amaral Peixoto', 35, null, 'Centro', 04, 24004900);
+VALUES (02, 'Avenida Ernani do Amaral Peixoto', 35, null, 'Centro', 14, 24004900);
 
 INSERT INTO cliente_endereco (cod_endereco, nome_end, no_casa, complemento, bairro, cod_cidade, cep)
-VALUES (03, 'Rua Duque de Caxias', 1304, 'ap 1', 'Centro Histórico', 03, 90010280);
+VALUES (03, 'Rua Duque de Caxias', 1304, 'ap 1', 'Centro Histórico', 13, 90010280);
 
 INSERT INTO cliente_endereco (cod_endereco, nome_end, no_casa, complemento, bairro, cod_cidade, cep)
-VALUES (04, 'Rua Ferreira Viana', 76, 'ap 2', 'São José', 02, 92425140);
+VALUES (04, 'Rua Ferreira Viana', 76, 'ap 2', 'São José', 12, 92425140);
 
 INSERT INTO cliente_endereco (cod_endereco, nome_end, no_casa, complemento, bairro, cod_cidade, cep)
-VALUES (03, 'Rua Ricardo Samuel de Araujo', 123, 'casa 2', 'Jardim Figueiredo', 01, 08526030);
+VALUES (05, 'Rua Ricardo Samuel de Araujo', 123, 'casa 2', 'Jardim Figueiredo', 11, 08526030);
+
+
+SELECT cod_endereco, nome_end, no_casa, complemento, bairro, cod_cidade, cep FROM cliente_endereco;
 
 
 --Inserções na tabela cliente
 INSERT INTO cliente (cliente_nome, cliente_sobrenome, cpf, nascimento, tipo_cnh, cod_endereco)
-VALUES ('Jihyo', 'Park', 14725836914, '1997-02-01', 'B', 03);
+VALUES ('Jihyo', 'Park', 14725836914, null, 'B', 03);
 
 INSERT INTO cliente (cliente_nome, cliente_sobrenome, cpf, nascimento, tipo_cnh, cod_endereco)
-VALUES ('Tzuyu', 'Chou', 36925814736, '1999-06-14', 'B', 05);
+VALUES ('Tzuyu', 'Chou', 36925814736, null, 'B', 05);
 
 INSERT INTO cliente (cliente_nome, cliente_sobrenome, cpf, nascimento, tipo_cnh, cod_endereco)
-VALUES ('Mina', 'Myoi', 12345678912, '1997-03-24', 'B', 01);
+VALUES ('Mina', 'Myoi', 12345678912, null, 'B', 01);
 
 INSERT INTO cliente (cliente_nome, cliente_sobrenome, cpf, nascimento, tipo_cnh, cod_endereco)
-VALUES ('Sana', 'Minatozaki', 78945612378, '1996-12-29', 'B', 04);
+VALUES ('Sana', 'Minatozaki', 78945612378, null, 'B', 04);
 
 INSERT INTO cliente (cliente_nome, cliente_sobrenome, cpf, nascimento, tipo_cnh, cod_endereco)
-VALUES ('Nayeon', 'Lim', 15975385214, '1995-09-22', 'B', 02);
+VALUES ('Nayeon', 'Lim', 15975385214, null, 'B', 02);
 
 
---inserir informações dos preços dos veículos por dia, semana e mês
-INSERT INTO preco_veiculo (id_preco, preco_dia, preco_semana, preco_mes)
-VALUES (11, 250, 1575, 6000);
+SELECT cliente_nome, cliente_sobrenome, cpf, nascimento, tipo_cnh, cod_endereco FROM cliente;
 
-INSERT INTO preco_veiculo (id_preco, preco_dia, preco_semana, preco_mes)
-VALUES (12, 300, 1890, 7200);
-
-INSERT INTO preco_veiculo (id_preco, preco_dia, preco_semana, preco_mes)
-VALUES (13, 400, 2520, 9600);
-
-INSERT INTO preco_veiculo (id_preco,  preco_dia, preco_semana, preco_mes)
-VALUES (14, 250, 1575, 6000);
-
-INSERT INTO preco_veiculo (id_preco, preco_dia, preco_semana, preco_mes)
-VALUES (15, 200, 1260, 4800);
-
-
---inserir informações sobre id_veiculo na  tabela de preços
-INSERT INTO preco_veiculo (id_veiculo)
-VALUES 
-  (01), 
-  (02), 
-  (03), 
-  (04), 
-  (05);
 
 
 --inserir infos sobre os veículos
-INSERT INTO veiculos (id_veiculo, placa, veiculo_nome, modelo, ano_veiculo, fabricante, no_passageiros, litros_portamalas, id_preco)
-VALUES (01, 'TWI1CE12', 'Cronos', 'Precision 1.3', 2023, 'Fiat', 5, 252, 11);
+INSERT INTO veiculo (id_veiculo, placa, veiculo_nome, modelo, ano_veiculo, fabricante, no_passageiros, litros_portamalas, preco_dia, preco_semana, preco_mes)
+VALUES (10, 'TWI1CE12', 'Cronos', 'Precision 1.3', 2023, 'Fiat', 5, 252, 250, 1575, 6000);
 
-INSERT INTO veiculos (id_veiculo, placa, veiculo_nome, modelo, ano_veiculo, fabricante, no_passageiros, litros_portamalas, id_preco)
-VALUES (02, 'ONC3E13', 'Spin', 'LTZ', 2023, 'Chevrolet', 7, 710, 12);
+INSERT INTO veiculo (id_veiculo, placa, veiculo_nome, modelo, ano_veiculo, fabricante, no_passageiros, litros_portamalas, preco_dia, preco_semana, preco_mes)
+VALUES (20, 'ONC3E13', 'Spin', 'LTZ', 2023, 'Chevrolet', 7, 710, 300, 1890, 7200);
 
-INSERT INTO veiculos (id_veiculo, placa, veiculo_nome, modelo, ano_veiculo, fabricante, no_passageiros, litros_portamalas, id_preco)
-VALUES (03, 'TZU2Y01', 'Jetta', 'GTI', 2021, 'Volkswagen', 5, 510 13);
+INSERT INTO veiculo (id_veiculo, placa, veiculo_nome, modelo, ano_veiculo, fabricante, no_passageiros, litros_portamalas, preco_dia, preco_semana, preco_mes)
+VALUES (30, 'TZU2Y01', 'Jetta', 'GTI', 2021, 'Volkswagen', 5, 510, 400, 2520, 9600);
 
-INSERT INTO veiculos (id_veiculo, placa, veiculo_nome, modelo, ano_veiculo, fabricante, no_passageiros, litros_portamalas, id_preco)
-VALUES (04, 'MIN4T02', 'Peugeot', '208', 2024, 'Citroen', 5, 285, 14);
+INSERT INTO veiculo (id_veiculo, placa, veiculo_nome, modelo, ano_veiculo, fabricante, no_passageiros, litros_portamalas, preco_dia, preco_semana, preco_mes)
+VALUES (40, 'MIN4T02', 'Peugeot', '208', 2024, 'Citroen', 5, 285, 250, 1575, 6000);
 
-INSERT INTO veiculos (id_veiculo, placa, veiculo_nome, modelo, ano_veiculo, fabricante, no_passageiros, litros_portamalas, id_preco)
-VALUES (05, 'JIH1Y00', 'HB20', 'Comfort Plus', 2024, 'Hyundai', 5, 300, 15);
+INSERT INTO veiculo (id_veiculo, placa, veiculo_nome, modelo, ano_veiculo, fabricante, no_passageiros, litros_portamalas, preco_dia, preco_semana, preco_mes)
+VALUES (50, 'JIH1Y00', 'HB20', 'Comfort Plus', 2024, 'Hyundai', 5, 300, 200, 1260, 4800);
+
+
+SELECT id_veiculo, placa, veiculo_nome, modelo, ano_veiculo, fabricante, no_passageiros, litros_portamalas, preco_dia, preco_semana, preco_mes FROM veiculo;
+
 
 
 --inserir informações sobre alugueis realizados
 INSERT INTO aluga (id_alug, cpf, id_veiculo, valor_alug, inicio_alug, fim_alug)
-VALUES (1, 3692581473, 04, 2250, '2023-09-03', '2023-09-13');
+VALUES (001, 3692581473, 40, 2250, '2023-09-03', '2023-09-13');
 
 INSERT INTO aluga (id_alug, cpf, id_veiculo, valor_alug, inicio_alug, fim_alug)
-VALUES (2, 12345678912, 03, 2520, '2023-08-18', '2023-08-25');
+VALUES (002, 12345678912, 30, 2520, '2023-08-18', '2023-08-25');
 
 INSERT INTO aluga (id_alug, cpf, id_veiculo, valor_alug, inicio_alug, fim_alug)
-VALUES (3, 78945612378, 02, 1200, '2023-09-01', '2023-09-04');
+VALUES (003, 78945612378, 20, 1200, '2023-09-01', '2023-09-04');
 
 INSERT INTO aluga (id_alug, cpf, id_veiculo, valor_alug, inicio_alug, fim_alug)
-VALUES (4, 15975385214, 01, 500, '2023-09-10', '2023-09-12');
+VALUES (004, 15975385214, 10, 500, '2023-09-10', '2023-09-12');
 
 
 --inserir mnanutenções realizadas na tabela de manutenção (os preços são bem aproximados, porque eu não faço ideia de quanto custa, pois não dirijo nem tenho carro)
 INSERT INTO manutencao (id_manu, id_veiculo, valor_manu, inicio_manu, fim_manu, tipo_manu)
-VALUES (1, 02, 110, '2023-08-15', '2023-08-16', 'Troca de óleo');
+VALUES (011, 20, 110, '2023-08-15', '2023-08-16', 'Troca de óleo');
 
 INSERT INTO manutencao (id_manu, id_veiculo, valor_manu, inicio_manu, fim_manu, tipo_manu)
-VALUES (2, 03, 400, '2023-09-01', '2023-09-02', 'Troca de fluido de transmissão');
+VALUES (012, 30, 400, '2023-09-01', '2023-09-02', 'Troca de fluido de transmissão');
 
 INSERT INTO manutencao (id_manu, id_veiculo, valor_manu, inicio_manu, fim_manu, tipo_manu)
-VALUES (3, 04, 400, '2023-09-28', '2023-09-29', 'Verificação dos freios e troca de pastilhas');
+VALUES (013, 40, 400, '2023-09-28', '2023-09-29', 'Verificação dos freios e troca de pastilhas');
 
 INSERT INTO manutencao (id_manu, id_veiculo, valor_manu, inicio_manu, fim_manu, tipo_manu)
-VALUES (4, 05, 50, '2023-09-15', '2023-09-16', 'Troca de filtro de ar');
+VALUES (014, 50, 50, '2023-09-15', '2023-09-16', 'Troca de filtro de ar');
