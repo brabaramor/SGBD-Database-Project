@@ -24,7 +24,7 @@ create table cliente (
   cliente_nome varchar2(20) not null,
   cliente_sobrenome varchar2(20) not null,
   cpf number not null,
-  nascimento date,
+  nascimento varchar2(15),
   tipo_cnh varchar2(2),
   cod_endereco number not null,
   primary key (cpf),
@@ -52,8 +52,8 @@ create table veiculo (
 create table aluga (
   	id_alug number not null,
   	valor_alug number not null,
-  	inicio_alug date not null,
-  	fim_alug date not null,
+  	inicio_alug varchar2(15) not null,
+  	fim_alug varchar2(15) not null,
     cpf number not null,
     id_veiculo number not null,
     primary key (id_alug),
@@ -66,8 +66,8 @@ create table manutencao (
   id_manu number not null,
   id_veiculo number not null,
   valor_manu number not null,
-  inicio_manu date not null,
-  fim_manu date not null,
+  inicio_manu varchar2(15) not null,
+  fim_manu varchar2(15) not null,
   tipo_manu varchar2(50),
   primary key (id_manu, id_veiculo),
   CONSTRAINT fk_manutencao_id_veiculo FOREIGN KEY (id_veiculo) REFERENCES veiculo (id_veiculo)
@@ -116,23 +116,22 @@ SELECT * FROM cliente_endereco;
 
 --Inserções na tabela cliente
 INSERT INTO cliente (cliente_nome, cliente_sobrenome, cpf, nascimento, tipo_cnh, cod_endereco)
-VALUES ('Jihyo', 'Park', 14725836914, null, 'B', 03);
+VALUES ('Jihyo', 'Park', 14725836914, TO_DATE('1997-02-01', 'YYYY-MM-DD'), 'B', 03);
 
 INSERT INTO cliente (cliente_nome, cliente_sobrenome, cpf, nascimento, tipo_cnh, cod_endereco)
-VALUES ('Tzuyu', 'Chou', 36925814736, null, 'B', 05);
+VALUES ('Tzuyu', 'Chou', 36925814736, TO_DATE('1999-06-14', 'YYYY-MM-DD'), 'B', 05);
 
 INSERT INTO cliente (cliente_nome, cliente_sobrenome, cpf, nascimento, tipo_cnh, cod_endereco)
-VALUES ('Mina', 'Myoi', 12345678912, null, 'B', 01);
+VALUES ('Mina', 'Myoi', 12345678912, TO_DATE('1997-03-24', 'YYYY-MM-DD'), 'B', 01);
 
 INSERT INTO cliente (cliente_nome, cliente_sobrenome, cpf, nascimento, tipo_cnh, cod_endereco)
-VALUES ('Sana', 'Minatozaki', 78945612378, null, 'B', 04);
+VALUES ('Sana', 'Minatozaki', 78945612378, TO_DATE('1996-12-29', 'YYYY-MM-DD'), 'B', 04);
 
 INSERT INTO cliente (cliente_nome, cliente_sobrenome, cpf, nascimento, tipo_cnh, cod_endereco)
-VALUES ('Nayeon', 'Lim', 15975385214, null, 'B', 02);
+VALUES ('Nayeon', 'Lim', 15975385214, TO_DATE('1995-09-22', 'YYYY-MM-DD'), 'B', 02);
 
 
 SELECT * FROM cliente;
-
 
 
 --inserir infos sobre os veículos
@@ -157,52 +156,30 @@ SELECT * FROM veiculo;
 
 --inserir informações sobre alugueis realizados
 INSERT INTO aluga (id_alug, cpf, id_veiculo, valor_alug, inicio_alug, fim_alug)
-VALUES (001, 3692581473, 40, 2250, '2023-09-03', '2023-09-13');
+VALUES (001, 36925814736, 40, 2250, TO_DATE('2023-09-03', 'YYYY-MM-DD'), TO_DATE('2023-09-13', 'YYYY-MM-DD'));
 
 INSERT INTO aluga (id_alug, cpf, id_veiculo, valor_alug, inicio_alug, fim_alug)
-VALUES (002, 12345678912, 30, 2520, '2023-08-18', '2023-08-25');
+VALUES (002, 12345678912, 30, 2520, TO_DATE('2023-08-18', 'YYYY-MM-DD'), TO_DATE('2023-08-25', 'YYYY-MM-DD'));
 
 INSERT INTO aluga (id_alug, cpf, id_veiculo, valor_alug, inicio_alug, fim_alug)
-VALUES (003, 78945612378, 20, 1200, '2023-09-01', '2023-09-04');
+VALUES (003, 78945612378, 20, 1200, TO_DATE('2023-09-01', 'YYYY-MM-DD'), TO_DATE('2023-09-04', 'YYYY-MM-DD'));
 
 INSERT INTO aluga (id_alug, cpf, id_veiculo, valor_alug, inicio_alug, fim_alug)
-VALUES (004, 15975385214, 10, 500, '2023-09-10', '2023-09-12');
+VALUES (004, 15975385214, 10, 500, TO_DATE('2023-09-10', 'YYYY-MM-DD'), TO_DATE('2023-09-12', 'YYYY-MM-DD'));
 
+SELECT * FROM aluga;
 
---inserir mnanutenções realizadas na tabela de manutenção (os preços são bem aproximados, porque eu não faço ideia de quanto custa, pois não dirijo nem tenho carro)
+--inserir manutencoes realizadas na tabela de manutencao
 INSERT INTO manutencao (id_manu, id_veiculo, valor_manu, inicio_manu, fim_manu, tipo_manu)
-VALUES (011, 20, 110, '2023-08-15', '2023-08-16', 'Troca de óleo');
-
-INSERT INTO manutencao (id_manu, id_veiculo, valor_manu, inicio_manu, fim_manu, tipo_manu)
-VALUES (012, 30, 400, '2023-09-01', '2023-09-02', 'Troca de fluido de transmissão');
+VALUES (011, 20, 110, TO_DATE('2023-08-15', 'YYYY-MM-DD'), TO_DATE('2023-08-16', 'YYYY-MM-DD'), 'Troca de óleo');
 
 INSERT INTO manutencao (id_manu, id_veiculo, valor_manu, inicio_manu, fim_manu, tipo_manu)
-VALUES (013, 40, 400, '2023-09-28', '2023-09-29', 'Verificação dos freios e troca de pastilhas');
+VALUES (012, 30, 400, TO_DATE('2023-09-01', 'YYYY-MM-DD'), TO_DATE('2023-09-02', 'YYYY-MM-DD'), 'Troca de fluido de transmissão');
 
 INSERT INTO manutencao (id_manu, id_veiculo, valor_manu, inicio_manu, fim_manu, tipo_manu)
-VALUES (014, 50, 50, '2023-09-15', '2023-09-16', 'Troca de filtro de ar');
+VALUES (013, 40, 400, TO_DATE('2023-09-28', 'YYYY-MM-DD'), TO_DATE('2023-09-29', 'YYYY-MM-DD'), 'Verificação dos freios e troca de pastilhas');
 
---consultas
---obter todos os veículos que nunca foram locados para nenhum cliente
-SELECT * FROM Veiculo WHERE id_veiculo NOT IN (SELECT id_veiculo FROM aluga);
+INSERT INTO manutencao (id_manu, id_veiculo, valor_manu, inicio_manu, fim_manu, tipo_manu)
+VALUES (014, 50, 50, TO_DATE('2023-09-15', 'YYYY-MM-DD'), TO_DATE('2023-09-16', 'YYYY-MM-DD'), 'Troca de filtro de ar');
 
---encontrar os clientes que alugaram um veículo específico, identificado pela placa
-SELECT cpf FROM cliente
-JOIN aluga a ON c.cpf = a.cpf
-JOIN veiculo v ON a.id_veiculo = v.id_veiculo
-WHERE v.placa = 'TWI1CE12';
-
---obter os clientes que alugaram veículos, juntamente com as informações sobre o veículo alugado, como a placa, modelo e fabricante.
-SELECT
-    c.cliente_nome,
-    c.cliente_sobrenome,
-    v.placa,
-    v.modelo,
-    v.fabricante
-FROM
-    cliente c
-JOIN
-    aluga a ON c.cpf = a.cpf
-JOIN
-    veiculo v ON a.id_veiculo = v.id_veiculo;
-
+SELECT * FROM manutencao
