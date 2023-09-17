@@ -1,0 +1,1 @@
+--aqui, estarão dispostos os códigos das consultas, montadas a partir das expressões algébricas
