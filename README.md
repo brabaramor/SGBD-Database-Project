@@ -10,9 +10,9 @@ This project was created for the Database course of my System development gradua
 </ul>
 
 <h2> 1 First Part</h2>
-For the ERD, I created 3 entities (people, object and event) and 2 relationships.
-<img src="https://drive.google.com/file/d/1jnNNtgSH1FVDtCVVfOBXUw1JN210oJf5/view?usp=sharing" alt="ERD diagram"> 
-
+For the ERD, I created 3 entities (people, object and event) and 2 relationships. You can visualize the ERD (in portuguese) in the image below.
+<p> </p>
+<a href='https://postimg.cc/025pQh4Q' target='_blank'><img src='https://i.postimg.cc/025pQh4Q/DER-Desafio-Barbara-Mor-Da-Mata.png' border='0' alt='ER Diagram' width='100%'/></a>
 <h2> 2 Second Part </h2>
 <table>
 <!-- Criando as colunas -->
