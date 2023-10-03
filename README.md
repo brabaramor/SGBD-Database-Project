@@ -3,18 +3,18 @@
 Hello!
 This project was created for the Database course of my System development graduation. To the project be completed, four parts must be deployed:
 <ul>
-  <li> The ERD (entity-relationship diagram);</li>
-  <li> The relational database normalized in the 3FN;</li>
-  <li> Three queries in relational algebra;</li>
-  <li> The SQL script for the queries.</li>
+  <li><a href="#text1">The ERD (entity-relationship diagram);</a></li>
+  <li><a href="#text2">The relational database model (normalized in the 3FN);</a></li>
+  <li><a href="#text3">Three queries in relational algebra and SQL;</a></li>
+  <li><a href="https://github.com/brabaramor/SGBD-Database-Project/">The SQL script to the Database and the SQL queries (available in this repository)</a></li>
 </ul>
 
-<h2> 1 First Part: the ER diagram</h2>
+<h2> 1 First Part: The ERD (entity-relationship diagram)<a name="text1"></a></h2>
 For the ERD, I created 3 entities (people, object and event) and 2 relationships. You can visualize the ERD (in portuguese) in the image below.
 <p> </p>
 <a href='https://postimg.cc/025pQh4Q' target='_blank'><img src='https://i.postimg.cc/025pQh4Q/DER-Desafio-Barbara-Mor-Da-Mata.png' border='0' alt='ER Diagram' width='100%'/></a>
 
-<h2> 2 Second Part: relational model of DB </h2>
+<h2> 2 Second Part: The relational database model (normalized in the 3FN)<a name="text2"></a></h2>
 <p> To deploy the database in the Oracle tool properly, we should create the logical data structure and do the normalization process in it to a relational database. So, I did normalize the data tables in the 3FN. As Machado (2004, p. 184) presents, the table is only in the 3FN if it is in 1FN and 2FN and if and only if there's no transitive dependency on any of the attributes but the primary key. So author also discusses that the table structure is in first normal form if all the columns have a single value and if there's no repetitive groups in a single line. Beyond, the table is in the second normal form if it is in the first normal form and if there's no functional dependency on either key than the primary key. </p>
 <p> After that, in the tables below you can see the result of the normalization process of the relationships, with some examples, to create and test the SQL script of the database.</p>
 
@@ -215,42 +215,66 @@ For the ERD, I created 3 entities (people, object and event) and 2 relationships
 </tr>
 </table>
 
-<h2>3 Third Part</h2>
+<h2>3 Third Part: Queries in Relational Algebra and SQL<a name="text3"></a></h2>
 Three relational algebra expressions must be created with the aim of meeting the following requirements:
 <br>
 <br>
 <strong> A) Obtain all vehicles that have never been rented to any customer; </strong>
 <br>
 <br>
-<p align='center'>(πid_veiculo(veiculo) - πid_veiculo(aluga))</p>
+<table align='center'>
+  <tr>
+    <th>(πid_veiculo(veiculo) - πid_veiculo(aluga))</th>
+  </tr>
+</table>
+
 <p>By projecting (π) the "id_veiculo" in the set difference of "veiculo" and "aluga" relationships, you can discover where "id_veiculo" is not present in "aluga" relationship. It means you can get the answer to: "which vehicle has never been rented?" </p>
 <p>The query to this relational algebraic expression is:</p>
-<p align='center'> SELECT id_veiculo FROM veiculo <br>
-WHERE id_veiculo NOT IN (SELECT id_veiculo FROM aluga);
-</p>
+<table align='center'>
+  <tr align='left'>
+    <th>SELECT id_veiculo FROM veiculo <br>
+WHERE id_veiculo NOT IN (SELECT id_veiculo FROM aluga);</th>
+  </tr>
+</table>
 <p> The query explains itself, but let's take a look: </p>
 
 <strong> B) Find customers who rented a specific vehicle, identified by the license plate; </strong>
-<p align='center'> πcpf(σplaca = 'TWI1CE12' (aluga ⨝ veiculo)) </p>
+<table align='center'> 
+  <tr>
+    <th>πcpf(σplaca = 'TWI1CE12' (aluga ⨝ veiculo))</th> 
+  </tr>
+</table>
+
 <p>First, you join (⨝) "aluga" and "veiculo" relationships, based on the "id_veiculo", which is a common attribute between them. Then, you select (σ) the data types with "TWI1CE12" as "placa" attribute in the "aluga" and "veiculo" joinning. Finally, you project (π) the "cpf" to answer: "who was the client which has rented the vehicle with "TWI1CE12" plate?"</p>
 <p>The SQL query is kind of similar to the algebraic expression. The "ON veiculo.id_veiculo = aluga.id_veiculo" was deployed to show the common attribute in the joinning "aluga ⨝ veiculo" </p>
-<p align='center'> SELECT aluga.cpf FROM aluga <br>
+
+<table align='center'>
+  <tr align='left'>
+    <th>SELECT aluga.cpf FROM aluga <br>
 INNER JOIN veiculo <br>
 ON aluga.id_veiculo = veiculo.id_veiculo <br>
-WHERE veiculo.placa = 'TWI1CE12';
-</p>
+WHERE veiculo.placa = 'TWI1CE12';</th>
+  </tr>
+</table>
 
 <strong> C) Obtain customers who rented vehicles, along with information about the rented vehicle, such as license plate, model and manufacturer. </strong>
-<p align='center'>π cpf, modelo, placa, fabricante(aluga ⨝ veiculo)</p>
+<table align='center'>
+  <tr>
+    <th>π cpf, modelo, placa, fabricante(aluga ⨝ veiculo)</th>
+  </tr>
+</table>
 <p>To answer the query: "which client has rented what vehicle? And what its plate and its manufactured?" You can project (π) "cpf", "modelo", "placa" and "fabricante" data types in the "aluga" and "veiculo" joinning.</p>
 <p>About the SQL query:</p>
-<p align='center'> SELECT veiculo.modelo, veiculo.placa, veiculo.fabricante, aluga.cpf <br>
-FROM veiculo <br>
-INNER JOIN aluga <br>
-ON veiculo.id_veiculo = aluga.id_veiculo <br>
-WHERE cpf IN(SELECT cpf from aluga);
-</p>
+
+<table align='center'> 
+  <tr align='left'>
+    <th>SELECT veiculo.modelo, veiculo.placa, veiculo.fabricante, aluga.cpf <br>
+      FROM veiculo <br>INNER JOIN aluga <br>
+      ON veiculo.id_veiculo = aluga.id_veiculo <br>
+      WHERE cpf IN(SELECT cpf from aluga); </th>
+  </tr>
+</table>
+
 <p>The "SELECT x FROM y INNER JOIN w" shows us the projection and joinning, but it's necessary to include the "ON veiculo.id_veiculo = aluga.id_veiculo" to show the common attribute in the joinning "aluga ⨝ veiculo", as I said in the second query (B) above Also, the subquery "SELECT cpf from aluga" will present only the "cpf" from "aluga" relationship.</p>
 <br>
-<h2>4 Fourth Part </h2>
-<p>The SQL script and queries can be accessed in this GitHub repository. You can test them on </p>
+</div>
