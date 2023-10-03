@@ -236,7 +236,7 @@ Three relational algebra expressions must be created with the aim of meeting the
 WHERE id_veiculo NOT IN (SELECT id_veiculo FROM aluga);</th>
   </tr>
 </table>
-<p> The query explains itself, but let's take a look: </p>
+<p> The query explains itself, but let's take a look: the query and subquery "SELECT x FROM y" do the projection part (π) and, finally, the "WHERE x NOT IN" does the same as the set difference (-) part.</p>
 
 <strong> B) Find customers who rented a specific vehicle, identified by the license plate; </strong>
 <table align='center'> 
@@ -277,4 +277,4 @@ WHERE veiculo.placa = 'TWI1CE12';</th>
 
 <p>The "SELECT x FROM y INNER JOIN w" shows us the projection and joinning, but it's necessary to include the "ON veiculo.id_veiculo = aluga.id_veiculo" to show the common attribute in the joinning "aluga ⨝ veiculo", as I said in the second query (B) above Also, the subquery "SELECT cpf from aluga" will present only the "cpf" from "aluga" relationship.</p>
 <br>
-</div>
+
