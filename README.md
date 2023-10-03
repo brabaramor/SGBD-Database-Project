@@ -279,3 +279,6 @@ WHERE veiculo.placa = 'TWI1CE12';</th>
 
 <p>The "SELECT x FROM y INNER JOIN w" shows us the projection and joinning, but it's necessary to include the "ON veiculo.id_veiculo = aluga.id_veiculo" to show the common attribute in the joinning "aluga ⨝ veiculo", as I said in the second query (B) above Also, the subquery "SELECT cpf from aluga" will present only the "cpf" from "aluga" relationship.</p>
 <br>
+
+<h2>References</h2>
+<p>MACHADO, Felipe N. R. Projeto de Banco de Dados: Uma visão prática. São Paulo: Érica, 2004. Disponível em: https://www.academia.edu/37093292/Banco_de_Dados_Projeto_e_Implementa%C3%A7%C3%A3o. Acesso em 9 set. 2023. </p>
