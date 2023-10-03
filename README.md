@@ -9,11 +9,14 @@ This project was created for the Database course of my System development gradua
   <li><a href="https://github.com/brabaramor/SGBD-Database-Project/">The SQL script to the Database and the SQL queries (available in this repository)</a></li>
 </ul>
 
+<!-- PRIMEIRA PARTE-->
 <h2><a name="text1">1 First Part: The ERD (entity-relationship diagram)</a></h2>
 For the ERD, I created 3 entities (people, object and event) and 2 relationships. You can visualize the ERD (in portuguese) in the image below.
 <p> </p>
 <a href='https://postimg.cc/025pQh4Q' target='_blank'><img src='https://i.postimg.cc/025pQh4Q/DER-Desafio-Barbara-Mor-Da-Mata.png' border='0' alt='ER Diagram' width='100%'/></a>
 
+
+<!-- SEGUNDA PARTE-->
 <h2><a name="text2">2 Second Part: The relational database model (normalized in the 3FN)</a></h2>
 <p> To deploy the database in the Oracle tool properly, we should create the logical data structure and do the normalization process in it to a relational database. So, I did normalize the data tables in the 3FN. As Machado (2004, p. 184) presents, the table is only in the 3FN if it is in 1FN and 2FN and if and only if there's no transitive dependency on any of the attributes but the primary key. So author also discusses that the table structure is in first normal form if all the columns have a single value and if there's no repetitive groups in a single line. Beyond, the table is in the second normal form if it is in the first normal form and if there's no functional dependency on either key than the primary key. </p>
 <p> After that, in the tables below you can see the result of the normalization process of the relationships, with some examples, to create and test the SQL script of the database.</p>
@@ -215,6 +218,7 @@ For the ERD, I created 3 entities (people, object and event) and 2 relationships
 </tr>
 </table>
 
+<!-- TERCEIRA PARTE-->
 <h2><a name="text3">3 Third Part: Queries in Relational Algebra and SQL</a></h2>
 Three relational algebra expressions must be created with the aim of meeting the following requirements:
 <br>
@@ -280,5 +284,6 @@ WHERE veiculo.placa = 'TWI1CE12';</th>
 <p>The "SELECT x FROM y INNER JOIN w" shows us the projection and joinning, but it's necessary to include the "ON veiculo.id_veiculo = aluga.id_veiculo" to show the common attribute in the joinning "aluga ⨝ veiculo", as I said in the second query (B) above Also, the subquery "SELECT cpf from aluga" will present only the "cpf" from "aluga" relationship.</p>
 <br>
 
+<!-- REFERÊNCIAS->
 <h2>References</h2>
 <p>MACHADO, Felipe N. R. Projeto de Banco de Dados: Uma visão prática. São Paulo: Érica, 2004. Disponível em: https://www.academia.edu/37093292/Banco_de_Dados_Projeto_e_Implementa%C3%A7%C3%A3o. Acesso em 9 set. 2023. </p>
