@@ -237,7 +237,8 @@ WHERE id_veiculo NOT IN (SELECT id_veiculo FROM aluga);</th>
   </tr>
 </table>
 <p> The query explains itself, but let's take a look: the query and subquery "SELECT x FROM y" do the projection part (π) and, finally, the "WHERE x NOT IN" does the same as the set difference (-) part.</p>
-
+<br>
+<br>
 <strong> B) Find customers who rented a specific vehicle, identified by the license plate; </strong>
 <table align='center'> 
   <tr>
@@ -256,7 +257,8 @@ ON aluga.id_veiculo = veiculo.id_veiculo <br>
 WHERE veiculo.placa = 'TWI1CE12';</th>
   </tr>
 </table>
-
+<br>
+<br>
 <strong> C) Obtain customers who rented vehicles, along with information about the rented vehicle, such as license plate, model and manufacturer. </strong>
 <table align='center'>
   <tr>
