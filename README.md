@@ -1,5 +1,5 @@
 # SGBD-Database-Project
-
+    
 Hello!
 This project was created for the Database course of my System development graduation. To the project be completed, four parts must be deployed:
 <ul>
@@ -277,4 +277,3 @@ WHERE veiculo.placa = 'TWI1CE12';</th>
 
 <p>The "SELECT x FROM y INNER JOIN w" shows us the projection and joinning, but it's necessary to include the "ON veiculo.id_veiculo = aluga.id_veiculo" to show the common attribute in the joinning "aluga ⨝ veiculo", as I said in the second query (B) above Also, the subquery "SELECT cpf from aluga" will present only the "cpf" from "aluga" relationship.</p>
 <br>
-
