@@ -13,7 +13,10 @@ This project was created for the Database course of my System development gradua
 For the ERD, I created 3 entities (people, object and event) and 2 relationships. You can visualize the ERD (in portuguese) in the image below.
 <p> </p>
 <a href='https://postimg.cc/025pQh4Q' target='_blank'><img src='https://i.postimg.cc/025pQh4Q/DER-Desafio-Barbara-Mor-Da-Mata.png' border='0' alt='ER Diagram' width='100%'/></a>
+
 <h2> 2 Second Part </h2>
+<p> To deploy the database in the Oracle tool properly, we should do the normalization process of the relational database. So, I did normalize the tables in the 3FN. As Machado (2004, p. 184) presents, the table is only in the 3FN if it is in 1FN and 2FN and if and only if there's no transitive dependency on any of the attributes but the primary key. So author also discusses that the table structure is in first normal form if all the columns have a single value and if there's no repetitive groups in a single line. Beyond, the table is in the second normal form if it is in the first normal form and if there's no functional dependency on either key than the primary key. </p>
+<p> After that, in the tables below you can see the result of the normalization process with some examples.</p>
 <table>
 <!-- Criando as colunas -->
 <tr>
